@@ -8,7 +8,13 @@ class AddButtom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: const Color.fromARGB(255, 73, 71, 71),
-      child: Column(children: [SizedBox(height: 30), CustomTextField()]),
+      child: Column(
+        children: [
+          SizedBox(height: 30),
+          CustomTextField(hintText: "Title"),
+          CustomTextField(hintText: "Content", maxLines: 6),
+        ],
+      ),
     );
   }
 }
