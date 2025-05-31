@@ -6,11 +6,9 @@ class NotesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-     Scaffold(
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 59, 57, 57),
       body: NotesViewBody(),
     );
   }
 }
-
-
