@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:notes_app/constants.dart';
 import 'package:notes_app/views/notes_views.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter(); // تهيئة Hive لتخزين البيانات
+
+  await Hive.openBox(kNotesBoxName); // فتح صندوق البيانات 'notes'
   runApp(
     DevicePreview(
       enabled: true, // خليه true وقت التطوير فقط
