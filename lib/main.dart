@@ -7,8 +7,10 @@ import 'package:notes_app/views/notes_views.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/views/simple_bloc_observer.dart';
 
 void main() async {
+  Bloc.observer = SimpleBlocObserver(); // تفعيل مراقب البلوكات
   await Hive.initFlutter(); // تهيئة Hive لتخزين البيانات
   Hive.registerAdapter(NoteModelAdapter()); // تسجيل محول البيانات
   await Hive.openBox(kNotesBoxName); // فتح صندوق البيانات
