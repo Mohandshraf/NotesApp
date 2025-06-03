@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:notes_app/constants.dart';
+import 'package:notes_app/cubits/notes_cubit.dart' show AddNotesCubit;
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/notes_views.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   await Hive.initFlutter(); // تهيئة Hive لتخزين البيانات
+  Hive.registerAdapter(NoteModelAdapter()); // تسجيل محول البيانات
+  await Hive.openBox(kNotesBoxName); // فتح صندوق البيانات
 
-  await Hive.openBox(kNotesBoxName); // فتح صندوق البيانات 'notes'
-  Hive.registerAdapter(
-    NoteModelAdapter(),
-  ); // تسجيل محول البيانات NoteTypeAdapter
   runApp(
     DevicePreview(
       enabled: true, // خليه true وقت التطوير فقط
@@ -26,11 +26,14 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      locale: DevicePreview.locale(context), // يحدد اللغة حسب الجهاز
-      builder: DevicePreview.appBuilder, // يبني التطبيق داخل preview
-      home: NotesView(), // الصفحة الرئيسية للتطبيق
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (context) => AddNotesCubit())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        locale: DevicePreview.locale(context), // يحدد اللغة حسب الجهاز
+        builder: DevicePreview.appBuilder, // يبني التطبيق داخل preview
+        home: NotesView(), // الصفحة الرئيسية للتطبيق
+      ),
     );
   }
 }

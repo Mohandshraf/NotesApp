@@ -1,0 +1,28 @@
+print("Welcome in the calculator!")
+
+choose = input("Choose an operation: +, -, *, /, **, //, %: ")
+
+print(choose)
+
+
+a = 0 
+
+while a < 1:
+  num1 = int(input("Enter first number: "))
+  num2 = int(input("Enter second number: "))
+  if choose == "+":
+    print(num1 + num2)
+  elif choose == "-": 
+    print(num1 - num2) 
+  elif choose == "*":
+    print(num1 * num2)
+  elif choose == "/":
+    if num2 == 0:
+      print("Error: Division by zero is not allowed.")
+    else:
+      print(num1 / num2)
+  elif choose == "**":
+    print(num1 ** num2)
+    
+else : 
+  choose = input("Choose an operation: +, -, *, /, **, //, %: ")
