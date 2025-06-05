@@ -41,8 +41,11 @@ class _AddButtomState extends State<AddButtom> {
             builder: (context, state) {
               return AbsorbPointer(
                 absorbing: state is NotesLoaded ? true : false,
-                child: SingleChildScrollView(
-                  child: const AddNoteForm()));
+                child: Padding(
+                  padding: EdgeInsets.only(left: 16, right: 16, bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: SingleChildScrollView(
+                    child: const AddNoteForm()),
+                ));
             },
           ),
         ),
