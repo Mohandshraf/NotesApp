@@ -39,7 +39,10 @@ class _AddButtomState extends State<AddButtom> {
               }
             },
             builder: (context, state) {
-              return SingleChildScrollView(child: const AddNoteForm());
+              return AbsorbPointer(
+                absorbing: state is NotesLoaded ? true : false,
+                child: SingleChildScrollView(
+                  child: const AddNoteForm()));
             },
           ),
         ),
