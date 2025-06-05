@@ -13,7 +13,7 @@ void main() async {
   Bloc.observer = SimpleBlocObserver(); // تفعيل مراقب البلوكات
   await Hive.initFlutter(); // تهيئة Hive لتخزين البيانات
   Hive.registerAdapter(NoteModelAdapter()); // تسجيل محول البيانات
-  await Hive.openBox(kNotesBoxName); // فتح صندوق البيانات
+  await Hive.openBox<NoteModel>(kNotesBoxName); // فتح صندوق البيانات
 
   runApp(
     DevicePreview(
@@ -28,14 +28,11 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => AddNotesCubit())],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        locale: DevicePreview.locale(context), // يحدد اللغة حسب الجهاز
-        builder: DevicePreview.appBuilder, // يبني التطبيق داخل preview
-        home: NotesView(), // الصفحة الرئيسية للتطبيق
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      locale: DevicePreview.locale(context), // يحدد اللغة حسب الجهاز
+      builder: DevicePreview.appBuilder, // يبني التطبيق داخل preview
+      home: NotesView(), // الصفحة الرئيسية للتطبيق
     );
   }
 }

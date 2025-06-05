@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomButtom extends StatelessWidget {
-  const CustomButtom({super.key, this.onTap});
+  const CustomButtom({super.key, this.onTap,  this.isLoading = false});
   final void Function()? onTap;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +17,18 @@ class CustomButtom extends StatelessWidget {
             color: const Color.fromARGB(255, 255, 255, 255),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Center(child: Text("Add", style: TextStyle(fontSize: 20))),
+          child: Center(
+            child: isLoading
+                ? const CircularProgressIndicator(
+                    color: Colors.blue,
+                  )
+                : const
+            Text(
+              "Add", 
+              style: 
+              TextStyle(
+                fontSize: 20
+                ))),
         ),
       ),
     );
